@@ -1,14 +1,272 @@
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+// 1. Write a program to implement the Push and Pop operation on Stack.
 
-  CREATE TABLE products (
-    product_id INT PRIMARY KEY,
-    vendor_id INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    price DECIMAL(10, 2) NOT NULL,
-    stock INT NOT NULL,
-    category VARCHAR(100),
-    skin_type_suitability VARCHAR(255),
-    created_at DATETIME
-);
-add image brand
+#include<stdio.h>
+#define Max 5
+int stack[Max];
+int top=-1;
+
+void push(int element){
+	if (top >=Max){
+		printf("Stack is overflow \n");
+		
+	}else{
+		stack[++top]=element;
+	}
+}
+
+void pop(){
+    if (top <= -1){
+        printf("Stack is underflow\n");
+    } else {
+        printf("Pop %d\n", stack[top--]);
+    }
+}
+
+void display(){
+	if (top == -1){
+		printf("Stack is underflow\n");
+	}
+	else{
+		printf("ELements in the stack are:\n");
+		for (int i=0;i<=top;i++){
+		printf("%d \n", stack[i]); 
+	}
+}
+}
+int main(){
+	
+	int number;
+	printf("Enter the elemets to be inserted into stack\n");
+
+	while(top < Max-1){
+        scanf("%d", &number);
+        push(number);
+	}
+	
+	display();			
+
+	pop();
+	display();
+	
+}
+
+//3. WAP to short the element using following Shorting algorithm.
+// selection sort
+
+#include <stdio.h>
+
+void selectionSort(int array[], int n) {
+    int i, j, min, temp; 
+  
+    for (i = 0; i < n - 1; i++) {
+        
+        min = i;
+        for (j = i + 1; j < n; j++) {
+            if (array[j] < array[min]) {
+                min = j;
+            }
+        }
+
+      
+        temp = array[min];
+        array[min] = array[i];
+        array[i] = temp;
+    }
+}
+
+void printArray(int array[], int n) {
+    int i; 
+    for (i = 0; i < n; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+	int size;
+	printf("Enter the size of array\n");
+	scanf("%d",&size);
+	
+	int array[size];
+	printf("Enter the elements of array\n");
+ 	for (int i=0;i<size;i++){
+ 		 scanf("%d", &array[i]);
+	 }
+    int n = sizeof(array) / sizeof(array[0]);
+
+    printf("Original array: ");
+    printArray(array, n);
+
+    selectionSort(array, n);
+
+    printf("Sorted array: ");
+    printArray(array, n);
+
+    return 0;
+}
+
+
+
+// merge sort
+
+#include <stdio.h>
+
+
+void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1; 
+    int n2 = right - mid;   
+
+ 
+    int L[n1], R[n2];
+
+    
+    int i;
+    int j;
+    int k;
+    for (i = 0; i < n1; i++) {
+        L[i] = arr[left + i];
+    }
+    for (j = 0; j < n2; j++) {
+        R[j] = arr[mid + 1 + j];
+    }
+
+   
+    i = 0; j = 0; k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        
+        merge(arr, left, mid, right);
+    }
+}
+
+
+void printArray(int arr[], int size) {
+    int i; 
+    for (i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+	int size;
+	printf("Enter the size of array\n");
+	scanf("%d",&size);
+	
+	int array[size];
+	printf("Enter the elements of array\n");
+ 	for (int i=0;i<size;i++){
+ 		 scanf("%d", &array[i]);
+	 }
+
+    int n = sizeof(array) / sizeof(array[0]);
+
+    printf("Unsorted array: ");
+    printArray(array, n);
+
+    mergeSort(array, 0, n - 1);
+
+    printf("Sorted array: ");
+    printArray(array, n);
+
+    return 0;
+}
+
+
+// 2. WAP to insert the element in Binary Search Tree (BST).
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+struct Node* insert(struct Node* root, int value) {
+    if (root == NULL) {
+        return createNode(value);
+    }
+    if (value < root->data) {
+        root->left = insert(root->left, value);
+    } else if (value > root->data) {
+        root->right = insert(root->right, value);
+    }
+    return root;
+}
+
+
+void inorderTraversal(struct Node* root) {
+    if (root != NULL) {
+        inorderTraversal(root->left);
+        printf("%d ", root->data);
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    struct Node* root = NULL;
+    int choice, value;
+    
+    while (1) {
+        printf("\nBinary Search Tree Operations:\n");
+        printf("1. Insert\n2. Display (In-Order Traversal)\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                printf("Enter value to insert: ");
+                scanf("%d", &value);
+                root = insert(root, value);
+                break;
+            case 2:
+                printf("In-Order Traversal: ");
+                inorderTraversal(root);
+                printf("\n");
+                break;
+            default:
+                printf("Invalid choice! Please enter a valid option.\n");
+        }
+    }
+    return 0;
+}

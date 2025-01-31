@@ -6,6 +6,7 @@ import BrandPage from '../pages/brands/BrandPage';
 import Search from '../pages/search/Search';
 import ProductPage from '../pages/products/ProductPage';
 import SingleProduct from '../pages/products/SingleProduct';
+import WebcamCapture from '../pages/home/WebcamCapture';
 
 import Login from '../components/Login';
 
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
         { path:"/", element: <Home/>},
         { path:"/brands/:brandName", element: <BrandPage/>},
         {path:"/search", element:<Search/>},
+        {
+          path:"/webcam",
+          element: <WebcamCapture />
+
+       },
         {path:"/products", element:<ProductPage/>},
         {path:"/products/:id", element:<SingleProduct/>},
  

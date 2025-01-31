@@ -16,7 +16,7 @@ const Banner = () => {
               </p>
 
               <button className="btn">
-                  <Link to="/"> 📸 Take Photo & Identify My Skin Type</Link>
+                  <Link to="/webcam"> 📸 Take Photo & Identify My Skin Type</Link>
               </button>
           </div>
           <div className="header__image"> 
