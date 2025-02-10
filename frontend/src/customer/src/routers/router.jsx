@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, Route } from "react-router-dom";
-import App from "../App";
+import App from "../Customer";
 import Home from "../pages/home/Home";
 import BrandPage from "../pages/brands/BrandPage";
 import Search from "../pages/search/Search";
