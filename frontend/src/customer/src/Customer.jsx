@@ -1,10 +1,9 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 import './Customer.css'
-
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { NotificationProvider } from './components/NotificationProvider'; // Import the NotificationProvider
 
-// In index.js or App.js
 
 
 function Customer() {
