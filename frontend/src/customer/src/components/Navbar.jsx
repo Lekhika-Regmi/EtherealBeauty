@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartModel from "../pages/products/CartModel";
+import Login from "../../../components/Login";
 
 const Navbar = () => {
   
