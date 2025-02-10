@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { Outlet } from 'react-router-dom';
 
 
-import './App.css'
+import './Vendor.css'
 import Navbar from './components/Navbar';
 import DashboardSideBar from './page/layout/DashboardSideBar';
 
-function App() {
+function Vendor() {
 
   return (
     <>
@@ -23,4 +23,4 @@ function App() {
   )
 }
 
-export default App
+export default Vendor

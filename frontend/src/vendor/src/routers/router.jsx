@@ -1,14 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
+import Vendor from '../../../vendor/src/Vendor';
 import CreateProduct from '../page/shop/CreateProduct';
 import AllProducts from '../page/shop/AllProducts';
 import Dashboard from '../page/shop/Dashboard';
 import EditProducts from '../page/shop/EditProducts';
+import Registration from '../../../components/Registration';
+import CustomerReg from '../../../components/CustomerReg';
+import VendorReg from '../../../components/VendorReg';
+import Login from '../../../components/Login';
 
-const router = createBrowserRouter([
+const vendorRouter = [
     {
-        path: "/",
-        element: <App />, // App serves as the layout (with Sidebar)
+        path: "/vendor",
+        element: <Vendor />, // App serves as the layout (with Sidebar)
         children: [
             {
                 path: "dashboard",  // Root route for Dashboard
@@ -27,7 +31,8 @@ const router = createBrowserRouter([
                 element: <EditProducts />,
             },
         ],
-    },
-]);
+    }
+   
+];
 
-export default router;
+export default { routes: vendorRouter };
