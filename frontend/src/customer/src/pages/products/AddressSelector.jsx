@@ -10,46 +10,33 @@ const AddressSelector = ({ province, setProvince, district, setDistrict, municip
     "x-rapidapi-key": "edfc1bcc3fmsh6dfa92503583514p175bc4jsnf3daa65830d6",
   };
 
-  // Fetch provinces
+  // Fetch provinces and districts in parallel on initial load
   useEffect(() => {
-    const fetchProvinces = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch("https://nepal-address3.p.rapidapi.com/province", { method: "GET", headers: apiHeaders });
-        const data = await response.json();
-        setProvinces(data.data.provinces || []);
+        const provinceRes = fetch("https://nepal-address3.p.rapidapi.com/province", { method: "GET", headers: apiHeaders });
+        const districtRes = province ? fetch(`https://nepal-address3.p.rapidapi.com/districtsByProvince?province=${province}`, { method: "GET", headers: apiHeaders }) : Promise.resolve({});
+
+        const [provinceData, districtData] = await Promise.all([await provinceRes, await districtRes]);
+
+        const provincesData = await provinceData.json();
+        setProvinces(provincesData.data.provinces || []);
+        
+        if (province) {
+          const districtsData = await districtData.json();
+          setDistricts(districtsData.data.districts || []);
+        }
       } catch (error) {
-        console.error("Error fetching provinces:", error);
+        console.error("Error fetching data:", error);
       }
     };
-    fetchProvinces();
-  }, []);
-
-  // Fetch districts when province changes
-  useEffect(() => {
-    if (province) {
-      const fetchDistricts = async () => {
-        try {
-          const response = await fetch(`https://nepal-address3.p.rapidapi.com/districtsByProvince?province=${province}`, {
-            method: "GET",
-            headers: apiHeaders,
-          });
-          const data = await response.json();
-          setDistricts(data.data.districts || []);
-        } catch (error) {
-          console.error("Error fetching districts:", error);
-        }
-      };
-      fetchDistricts();
-    } else {
-      setDistricts([]);
-      setMunicipalities([]);
-    }
+    fetchData();
   }, [province]);
 
   // Fetch municipalities when district changes
   useEffect(() => {
-    if (district) {
-      const fetchMunicipalities = async () => {
+    const fetchMunicipalities = async () => {
+      if (district) {
         try {
           const response = await fetch(`https://nepal-address3.p.rapidapi.com/municipalsByDistrict?district=${district}`, {
             method: "GET",
@@ -60,11 +47,11 @@ const AddressSelector = ({ province, setProvince, district, setDistrict, municip
         } catch (error) {
           console.error("Error fetching municipalities:", error);
         }
-      };
-      fetchMunicipalities();
-    } else {
-      setMunicipalities([]);
-    }
+      } else {
+        setMunicipalities([]);
+      }
+    };
+    fetchMunicipalities();
   }, [district]);
 
   return (

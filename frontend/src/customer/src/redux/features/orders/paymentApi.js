@@ -23,7 +23,6 @@ const paymentApi = {
       console.error("❌ Error initializing Khalti payment:", error);
     }
   },
-};
-
+}
 
 export default paymentApi;

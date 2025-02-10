@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getBaseUrl } from "../../utils/baseURL";
 import { useCreateOrderMutation } from "../../redux/features/orders/orderApi";
 import paymentApi from "../../redux/features/orders/paymentApi"
 import AddressSelector from "./AddressSelector";
@@ -72,18 +71,7 @@ const [orderPlaced, setOrderPlaced] = useState(false);
       if (payment_method === "Khalti") {
         console.log("🚀 Calling Khalti Payment API...");
         await paymentApi.initializeKhaltiPayment(orderId, window.location.origin);
-      } else if (payment_method === "Esewa") {
-        console.log("🔄 Redirecting to eSewa...");
-        window.location.href = `https://esewa.com.np/epay/main?amt=${grandTotal}&pid=${orderId}&scd=your_esewa_merchant_code&su=your_success_url&fu=your_failure_url`;
-      } else {
-        console.log("💰 Cash on Delivery Selected");
-        setOrderPlaced(true);
-        setTimeout(() => {
-          setOrderPlaced(false);
-          navigate("/orders");
-        }, 2000);
-      }
-  
+      } 
       // alert("Order placed successfully!");
     } catch (error) {
       console.error("❌ Error placing order:", error);
@@ -132,9 +120,7 @@ const [orderPlaced, setOrderPlaced] = useState(false);
         onChange={(e) => setPaymentMethod(e.target.value)}
         className="border p-2 rounded w-full"
       >
-        <option value="Esewa">Esewa</option>
         <option value="Khalti">Khalti</option>
-        <option value="Cash on Delivery">Cash on Delivery</option>
       </select>
 
       <div className="flex justify-between mt-6">
@@ -158,4 +144,3 @@ const [orderPlaced, setOrderPlaced] = useState(false);
 };
 
 export default Checkout;   
-
