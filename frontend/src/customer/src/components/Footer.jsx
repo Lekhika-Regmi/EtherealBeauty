@@ -24,7 +24,7 @@ const Footer = () => {
         <div className='footer__col'>
             <h4>COMPANY</h4>
            <Link to="/">Home</Link>
-           <Link to="/">About Us</Link>
+           <Link to="/about">About Us</Link>
            <Link to="/">Terms and Conditions</Link>
         </div>
 

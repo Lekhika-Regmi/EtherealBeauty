@@ -15,6 +15,7 @@ import PaymentSuccess from "../pages/orders/PaymentSuccess";
 import ViewOrders from "../pages/orders/ViewOrders";
 import AqiPage from "../pages/aqi/AqiPage";
 import Contact from "../pages/contact/Contact";
+import About from "../pages/contact/About";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: "/orders", element: <ViewOrders /> },
       { path: "/aqi", element: <AqiPage /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/about", element: <About /> },
     ],
   },
   {
@@ -42,7 +44,6 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
-]);
-// console.log("Routes Loaded:", router.routes);
+])
 
 export default router;

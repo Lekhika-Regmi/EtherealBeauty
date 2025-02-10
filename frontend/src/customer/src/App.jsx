@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/navbar';
+import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { NotificationProvider } from './components/NotificationProvider'; // Import the NotificationProvider
 

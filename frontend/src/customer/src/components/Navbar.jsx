@@ -16,9 +16,9 @@ const mockUser = {
 
 
 // Replace the actual Redux state with the mock data to test
-const user = mockUser;  // For logged-in state
+//const user = 0;  // For logged-in state
 // const user = null;  // For logged-out state (comment out the above line and uncomment this one)
-
+const user = mockUser;
  // const user = useSelector((state) => state.user);  // Assuming user state contains user info
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);  // State to toggle dropdown
